@@ -1,8 +1,7 @@
-import Methods from "../../Methods/Methods";
+import Methods from "../../../Methods/Methods";
 
-import { useContext } from "react";
-import { MyContext } from "../../UseContext/UseContext";
-import Spinner from "../fetchers/Spinner/Spinner";
+import { useGlobalContext } from "../../../UseContext/UseContext";
+import Spinner from "../../fetchers/Spinner/Spinner";
 const CreateNFT = () => {
   const {
     setInputDescription,
@@ -10,7 +9,7 @@ const CreateNFT = () => {
     isLoading,
     colorMessage,
     messageStatues,
-  } = useContext(MyContext);
+  } = useGlobalContext();
   const { mintNFT } = Methods();
 
   return (

@@ -1,11 +1,13 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 import { InjectedConnector } from "@web3-react/injected-connector";
+import useEzeyNFTFactory from "../Hook/useEzeyNFTFactory";
 
 export const MyContext = createContext();
 export const MyProvider = MyContext.Provider;
 
 const UseContext = ({ children }) => {
+  const { listUserNFTs} = useEzeyNFTFactory();
   const injected = new InjectedConnector({
     supportedChainIds: [1, 3, 4, 5, 42, 137, 56, 43114, 80001, 421611],
   });
@@ -27,7 +29,7 @@ const UseContext = ({ children }) => {
     setTimeout(() => {
       setMessageStatues("");
       setColorMessage("");
-    }, 3000);
+    }, 4000);
   };
 
   const addressShortcut = (addressWallet) => {
@@ -47,33 +49,38 @@ const UseContext = ({ children }) => {
       );
     }
   };
-  return (
-    <MyProvider
-      value={{
-        connectMetaMask,
-        account,
-        inputName,
-        setInputName,
-        inputSymbol,
-        setInputSymbol,
-        inputDescription,
-        setInputDescription,
-        inputURI,
-        setInputURI,
-        addressShortcut,
-        isLoading,
-        setIsLoading,
-        messageStatues,
-        setMessageStatues,
-        colorMessage,
-        setColorMessage,
-        contractAddress,
-        setContractAddress,
-        handleStatues,
-      }}
-    >
-      {children}
-    </MyProvider>
-  );
+const fetchListNFT =async ()=>{
+  let itemsCollection = await listUserNFTs();
+  return itemsCollection
+}
+  
+  const values = {
+    connectMetaMask,
+    account,
+    inputName,
+    setInputName,
+    inputSymbol,
+    setInputSymbol,
+    inputDescription,
+    setInputDescription,
+    inputURI,
+    setInputURI,
+    addressShortcut,
+    isLoading,
+    setIsLoading,
+    messageStatues,
+    setMessageStatues,
+    colorMessage,
+    setColorMessage,
+    contractAddress,
+    setContractAddress,
+    handleStatues,
+    fetchListNFT
+  };
+  return <MyProvider value={values}>{children}</MyProvider>;
+};
+
+export const useGlobalContext = () => {
+  return useContext(MyContext);
 };
 export default UseContext;

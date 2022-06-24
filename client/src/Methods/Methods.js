@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { MyContext } from "../UseContext/UseContext";
+import { useGlobalContext } from "../UseContext/UseContext";
 import useEzeyNFTFactory from "../Hook/useEzeyNFTFactory";
 import UseEzeyFunctionsAPI from "../Hook/useEzeyFunctionAPI";
 import UseMintEzeyNFT from "../Hook/UseMintEzeyNFT";
@@ -20,7 +19,10 @@ const Methods = () => {
     setMessageStatues,
     setColorMessage,
     handleStatues,
-  } = useContext(MyContext);
+  } = useGlobalContext();
+
+
+  
   const { createNFT, getNftAddress, getContractAddressBySymbol, getWalletID } =
     useEzeyNFTFactory();
 
@@ -70,12 +72,14 @@ const Methods = () => {
             inputDescription
           );
           let walletID = await getWalletID();
-          await insertToCollectionTable(
-            inputSymbol,
-            inputURI,
-            walletID,
-            account
-          );
+          handleStatues("Uploading of NFT was successful. You can upload more NFT collections", "green");
+
+          // await insertToCollectionTable(
+          //   inputSymbol,
+          //   inputURI,
+          //   walletID,
+          //   account
+          // );
         }
         setIsLoading(false);
       }

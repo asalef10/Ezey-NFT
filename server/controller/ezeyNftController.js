@@ -1,64 +1,95 @@
 const db = require("../connectDB/DB");
+const Web3 = require("web3");
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 
-async function insertToUsersNFTable(req, res, id, addressWallet) {
-  // let id = req.body.id;
-  // let addressWallet = req.body.addressWallet;
-  db.query(
-    `INSERT INTO ezeyNFT.userNFT (id,addressWallet) VALUES ('${addressWallet}','${id}')  `,
-    (err, result) => {
-      if (err) throw err;
-      console.log(result);
-      res.send(result);
-      // return console.log(res);
-    }
-  );
+const EzeyNFTFEventABI = require("../Artifacts/ezeyNftEvent.json");
+
+const wsProvider = new Web3.providers.WebsocketProvider(
+  "wss://morning-twilight-cherry.matic-testnet.quiknode.pro/6ba9d2c5b8a046814b28f974c3643c679914f7ff/"
+);
+
+HDWalletProvider.prototype.on = wsProvider.on.bind(wsProvider);
+let walletKEY = process.env.WALLET_KEY;
+let provider = new HDWalletProvider(walletKEY, wsProvider);
+
+const web3 = new Web3(provider);
+
+let name;
+let symbol;
+let addressWallet;
+let walletID;
+let tokenURI;
+let description;
+async function Event_Handler(err, data) {
+  let result = data.returnValues;
+  if (!err) {
+    console.log(result);
+    name = result.name;
+    symbol = result.symbol;
+    tokenURI = result.tokenURI;
+    description = result.description;
+    walletID = result.walletID;
+    addressWallet = result.addressWallet;
+    console.log(result);
+    insertToCollectionTable();
+  }
 }
 
-async function insertToCollectionTable(req, res) {
-  let NFTSymbol = req.body.NFTSymbol;
-  let NFTUrl = req.body.NFTUrl;
-  let IDAddressWallet = req.body.IDAddressWallet;
-  let addressWallet = req.body.addressWallet;
+async function listenEvent() {
+  try {
+    let eventEmiterContract = new web3.eth.Contract(
+      EzeyNFTFEventABI.abi,
+      "0x2Bf63F3dbfdABe7103B1cbD9982Ac62356295B7E"
+    );
+    await eventEmiterContract.events.newCollection(Event_Handler);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-  async function insertToTable() {
+
+async function insertToCollectionTable(req, res) {
+  try {
+    async function insertToTable() {
+      db.query(
+        `INSERT INTO ezeyNFT.collectionNFT (NFTSymbol,NFTUrl,IDAddressWallet,name,description) VALUES ('${symbol}','${tokenURI}','${walletID}','${name}','${description}')  `,
+        (err, newResult) => {
+          if (err) throw err;
+          console.log(newResult);
+          return newResult;
+        }
+      );
+    }
+
     db.query(
-      `INSERT INTO ezeyNFT.collectionNFT (NFTSymbol,NFTUrl,IDAddressWallet) VALUES ('${NFTSymbol}','${NFTUrl}','${IDAddressWallet}')  `,
-      (err, newResult) => {
-        if (err) throw err;
-        console.log(newResult);
-        return newResult;
+      `SELECT * FROM ezeyNFT.userNFT WHERE addressWallet = '${addressWallet}'  `,
+      async (err, result) => {
+        if (err) {
+          throw err;
+        } else if (result.length == 0) {
+          async function newUser() {
+            db.query(
+              `INSERT INTO ezeyNFT.userNFT (id,addressWallet) VALUES ('${walletID}','${addressWallet}')  `,
+              (err) => {
+                if (err) throw err;
+                return res;
+              }
+            );
+          }
+          await newUser();
+
+          await insertToTable();
+        } else {
+          await insertToTable();
+        }
+        // console.log(result);
+        // res.send(result);
+        return result;
       }
     );
+  } catch (error) {
+    console.log(error);
   }
-
-  db.query(
-    `SELECT * FROM ezeyNFT.userNFT WHERE addressWallet = '${addressWallet}'  `,
-    async (err, result) => {
-      if (err) {
-        throw err;
-      } else if (result.length == 0) {
-        async function newUser() {
-          db.query(
-            `INSERT INTO ezeyNFT.userNFT (id,addressWallet) VALUES ('${IDAddressWallet}','${addressWallet}')  `,
-            (err, result) => {
-              if (err) throw err;
-              // console.log(result);
-              res.send(result);
-              return res;
-            }
-          );
-        }
-        await newUser();
-
-        await insertToTable();
-      } else {
-        await insertToTable();
-      }
-      // console.log(result);
-      // res.send(result);
-      return result;
-    }
-  );
 }
 
 function getAllData(req, res) {
@@ -128,8 +159,9 @@ function deleteItemInTable(length) {
     // }
   });
 }
+listenEvent();
+
 module.exports = {
-  insertToUsersNFTable,
   insertToCollectionTable,
   getAllData,
   walletExist,

@@ -11,6 +11,11 @@
                     "internalType": "string",
                     "name": "symbol",
                     "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "walletID",
+                    "type": "uint256"
                 }
             ],
             "stateMutability": "nonpayable",
@@ -92,6 +97,31 @@
             "type": "event"
         },
         {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "tokenURI",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "description",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "addressWallet",
+                    "type": "address"
+                }
+            ],
+            "name": "newCollection",
+            "type": "event"
+        },
+        {
             "inputs": [
                 {
                     "internalType": "address",
@@ -136,6 +166,19 @@
                     "internalType": "string",
                     "name": "",
                     "type": "string"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "eventContractAddress",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
                 }
             ],
             "stateMutability": "view",
@@ -468,6 +511,19 @@
             "name": "transferFrom",
             "outputs": [],
             "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "walletUserID",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
             "type": "function"
         }
     ]

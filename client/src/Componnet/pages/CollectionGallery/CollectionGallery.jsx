@@ -1,10 +1,9 @@
-import { useContext } from "react";
-import { MyContext } from "../../UseContext/UseContext";
-import CarouselNFT from "../fetchers/Carousela/Carousel";
+import { useGlobalContext } from "../../../UseContext/UseContext";
+import CarouselNFT from "../../fetchers/Carousela/Carousel";
 import { Link } from "react-router-dom";
 
 const CollectionGallery = () => {
-  const { connectMetaMask } = useContext(MyContext);
+  const { connectMetaMask } = useGlobalContext();
   return (
     <section id="feature">
       <div className="container">

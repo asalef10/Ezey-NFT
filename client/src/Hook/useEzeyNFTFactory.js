@@ -1,5 +1,5 @@
-import { useWeb3React } from "@web3-react/core";
 import Web3 from "web3";
+import { useWeb3React } from "@web3-react/core";
 
 const useEzeyNFTJSON = require("../Artifacts/EzeyNFTFactory.json");
 const useEzeyNFTFactory = () => {
@@ -9,7 +9,7 @@ const useEzeyNFTFactory = () => {
 
   let ezeyNFT = new web3.eth.Contract(
     useEzeyNFTJSON.abi,
-    "0xc717a22D58616E1DE3e577AAC9caeE36784A484A"
+    "0xa36Eb0aa24Ea65306d4f2fEE5C692F2a7E505507"
     // "0xc717a22D58616E1DE3e577AAC9caeE36784A484A"
   );
 

@@ -1,11 +1,12 @@
-import Methods from "../../Methods/Methods";
+import Methods from "../../../Methods/Methods";
 import { useContext, useEffect } from "react";
-import { MyContext } from "../../UseContext/UseContext";
-import { useLocation } from "react-router-dom";
-import Spinner from "../fetchers/Spinner/Spinner";
+import { MyContext } from "../../../UseContext/UseContext";
+import Spinner from "../../fetchers/Spinner/Spinner";
+// import Steps from "../../../fetchers/Steps/Steps";
 
 const CreateCollection = () => {
   useEffect(() => {
+    
     setInputSymbol("");
   }, []);
   const {
@@ -17,10 +18,10 @@ const CreateCollection = () => {
   } = useContext(MyContext);
 
   const { createCollection } = Methods();
-  const location = useLocation();
 
   return (
     <>
+      {/* <Steps></Steps> */}
       <section id="contact">
         <div className="container">
           <div className="row">
@@ -30,9 +31,8 @@ const CreateCollection = () => {
                   Create Collection NFT
                 </h1>
                 <p className="wow fadeInUp" data-wow-delay="0.6s">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-                  diam nonummy nibh euismod tincidunt ut laoreet. Dolore magna
-                  aliquam erat volutpat.
+                  Simple and faster creation of individual NFTs and collections
+                  of NFTs is now possible{" "}
                 </p>
                 {<h5 style={{ color: colorMessage }}>{messageStatues}</h5>}
                 {isLoading && <Spinner />}
