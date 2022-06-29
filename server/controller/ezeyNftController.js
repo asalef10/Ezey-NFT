@@ -36,6 +36,9 @@ async function Event_Handler(err, data) {
 }
 
 async function listenEvent() {
+// const contract = new web3.eth.Contract(EzeyNFTFEventABI,"0x2Bf63F3dbfdABe7103B1cbD9982Ac62356295B7E")
+// contract.events.newCollection({}).on('data',async (event)=>{console.log(event);})
+
   try {
     let eventEmiterContract = new web3.eth.Contract(
       EzeyNFTFEventABI.abi,

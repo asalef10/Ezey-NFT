@@ -1,8 +1,10 @@
 import Methods from "../../../Methods/Methods";
-import { useContext, useEffect } from "react";
-import { MyContext } from "../../../UseContext/UseContext";
+import {  useEffect } from "react";
+import { useGlobalContext } from "../../../UseContext/UseContext";
 import Spinner from "../../fetchers/Spinner/Spinner";
-// import Steps from "../../../fetchers/Steps/Steps";
+import Steps from "../../fetchers/Steps/Steps";
+import { useNavigate } from "react-router-dom";
+
 
 const CreateCollection = () => {
   useEffect(() => {
@@ -15,13 +17,27 @@ const CreateCollection = () => {
     isLoading,
     messageStatues,
     colorMessage,
-  } = useContext(MyContext);
+    account
+  } = useGlobalContext();
+let lastAccount;
+  const history = useNavigate();
+const handleAccount = ()=>{
+
+  if(account ==!lastAccount){
+    history("/My-Collection")
+    console.log(lastAccount);
+  }
+}
+useEffect(()=>{
+  history("/My-Collection")
+
+},[account])
 
   const { createCollection } = Methods();
 
   return (
     <>
-      {/* <Steps></Steps> */}
+      <Steps step1={"active"}/>
       <section id="contact">
         <div className="container">
           <div className="row">

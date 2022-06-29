@@ -21,21 +21,12 @@ const AddToCollection = () => {
     let resultList = await fetchListNFT();
     console.log(resultList);
     setListNFT(resultList);
-    // console.log(listNFT);
   };
 
   const collectionList = listNFT.map((list) => {
     return (
       <>
-        <p
-          style={{
-            color: "black",
-            textAlign: "center",
-            background: "aliceblue",
-          }}
-        >
-          {list.nameSYMBOL}
-        </p>
+        <p className="collectionList">{list.nameSYMBOL}</p>
       </>
     );
   });
@@ -44,7 +35,7 @@ const AddToCollection = () => {
       <div className="container">
         <div className="sidenav">
           <div>
-            {!collectionList.length==0 && <h3>collection's</h3>}
+            {!collectionList.length == 0 && <h3>collection's</h3>}
             <p>{collectionList && collectionList}</p>
           </div>
         </div>

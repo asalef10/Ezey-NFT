@@ -1,11 +1,12 @@
-#home{
-  background: url("https://images.unsplash.com/photo-1647514422086-18cde746fa26?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332") no-repeat center center/cover;
+#home {
+  background: url("https://images.unsplash.com/photo-1647514422086-18cde746fa26?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332")
+    no-repeat center center/cover;
   /* background: url("https://images.unsplash.com/photo-1642525027649-00d7397a6d4a?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070") no-repeat center center/cover; */
 }
-#alertMessage{
+#alertMessage {
   background: #ff3b3b57;
-    letter-spacing: 0px;
-    border-radius: 11%;
+  letter-spacing: 0px;
+  border-radius: 11%;
 }
 
 /* * {
@@ -13,3 +14,9 @@
   margin: 0;
   padding: 0;
 } */
+.collectionList {
+  color: "black";
+
+  text-align: center;
+  background: aliceblue;
+}

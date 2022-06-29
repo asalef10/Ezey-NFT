@@ -29,9 +29,8 @@ const UserCollection = () => {
 
   const collectionList = listNFT.map((list) => {
     return (
-      <p
-        style={{ color: "black", textAlign: "center", background: "aliceblue" }}
-      >
+      <p className="collectionList"
+       >
         {list.nameSYMBOL}
       </p>
     );

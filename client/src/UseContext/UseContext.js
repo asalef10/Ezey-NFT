@@ -29,7 +29,7 @@ const UseContext = ({ children }) => {
     setTimeout(() => {
       setMessageStatues("");
       setColorMessage("");
-    }, 4000);
+    }, 3000);
   };
 
   const addressShortcut = (addressWallet) => {

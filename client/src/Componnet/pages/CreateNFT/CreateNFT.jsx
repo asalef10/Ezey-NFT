@@ -1,7 +1,11 @@
+import { useEffect } from "react";
 import Methods from "../../../Methods/Methods";
+import { useNavigate } from "react-router-dom";
 
 import { useGlobalContext } from "../../../UseContext/UseContext";
 import Spinner from "../../fetchers/Spinner/Spinner";
+import Steps from "../../fetchers/Steps/Steps";
+import { useRef } from "react";
 const CreateNFT = () => {
   const {
     setInputDescription,
@@ -9,11 +13,17 @@ const CreateNFT = () => {
     isLoading,
     colorMessage,
     messageStatues,
+    account
   } = useGlobalContext();
   const { mintNFT } = Methods();
+  const history = useNavigate();
+  const isInitialMount = useRef(true);
+ 
 
   return (
     <>
+          <Steps step2={"active"}/>
+
       <section id="contact">
         <div className="container">
           <div className="row">
