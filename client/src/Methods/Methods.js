@@ -1,6 +1,5 @@
 import { useGlobalContext } from "../UseContext/UseContext";
-import useEzeyNFTFactory from "../Hook/useEzeyNFTFactory";
-import UseEzeyFunctionsAPI from "../Hook/useEzeyFunctionAPI";
+import useEzeyNFTFactory from "../Hook/UseEzeyNFTFactory";
 import UseMintEzeyNFT from "../Hook/UseMintEzeyNFT";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +7,6 @@ const Methods = () => {
   let isFindCollection = false;
   let oldContractAddress;
   const history = useNavigate();
-  const { insertToCollectionTable } = UseEzeyFunctionsAPI();
   const {
     account,
     inputName,
@@ -16,14 +14,13 @@ const Methods = () => {
     inputDescription,
     inputURI,
     setIsLoading,
-    setMessageStatues,
-    setColorMessage,
+   
     handleStatues,
   } = useGlobalContext();
 
 
   
-  const { createNFT, getNftAddress, getContractAddressBySymbol, getWalletID } =
+  const { createNFT, getNftAddress, getContractAddressBySymbol,   } =
     useEzeyNFTFactory();
 
   const createCollection = async () => {
@@ -34,13 +31,13 @@ const Methods = () => {
         if (inputName && inputSymbol) {
           setIsLoading(true);
           await createNFT(inputName, inputSymbol);
+          setIsLoading(false);
           handleStatues("The collection was created successfully", "green");
           setTimeout(() => {
             history("/Create-NFT");
           }, 3000);
 
           console.log(inputName);
-          setIsLoading(false);
         }
       }
     } catch (error) {
@@ -71,15 +68,7 @@ const Methods = () => {
             inputURI,
             inputDescription
           );
-          let walletID = await getWalletID();
           handleStatues("Uploading of NFT was successful. You can upload more NFT collections", "green");
-
-          // await insertToCollectionTable(
-          //   inputSymbol,
-          //   inputURI,
-          //   walletID,
-          //   account
-          // );
         }
         setIsLoading(false);
       }

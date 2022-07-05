@@ -1,5 +1,5 @@
 const ezeyRouting = require("express").Router();
-const ezeyControllers = require("../controller/ezeyNftController");
+const ezeyControllers = require("../controller/EzeyNftController");
 ezeyRouting.post("/insertToCollectionTable", ezeyControllers.insertToCollectionTable);
 ezeyRouting.get("/getAllData", ezeyControllers.getAllData);
 ezeyRouting.post("/getDataById", ezeyControllers.getDataById);

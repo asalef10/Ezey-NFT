@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 import { InjectedConnector } from "@web3-react/injected-connector";
-import useEzeyNFTFactory from "../Hook/useEzeyNFTFactory";
+import useEzeyNFTFactory from "../Hook/UseEzeyNFTFactory";
 
 export const MyContext = createContext();
 export const MyProvider = MyContext.Provider;

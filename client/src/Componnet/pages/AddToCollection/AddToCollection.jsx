@@ -3,6 +3,7 @@ import Spinner from "../../fetchers/Spinner/Spinner";
 import Methods from "../../../Methods/Methods";
 import { useEffect } from "react";
 import { useState } from "react";
+import "./AddToCollection.css";
 const AddToCollection = () => {
   const [listNFT, setListNFT] = useState([]);
   const {
@@ -35,7 +36,7 @@ const AddToCollection = () => {
       <div className="container">
         <div className="sidenav">
           <div>
-            {!collectionList.length == 0 && <h3>collection's</h3>}
+            {!collectionList.length === 0 && <h3>collection's</h3>}
             <p>{collectionList && collectionList}</p>
           </div>
         </div>
@@ -57,7 +58,7 @@ const AddToCollection = () => {
             <div className="contact-form wow fadeInUp" data-wow-delay="1.0s">
               <div id="contact-form">
                 <div id="simpleCon">
-                  <div className="col-md-6 col-sm-6">
+                  <div id="inputHandleO" className="col-md-6 col-sm-6">
                     <input
                       onChange={(e) => {
                         setInputSymbol(e.target.value);

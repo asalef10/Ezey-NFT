@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Footer from "../Footer/Footer";
 
 const HomePage = () => {
-  const { connectMetaMask,messageStatues} =useGlobalContext();
+  const { connectMetaMask, messageStatues } = useGlobalContext();
   return (
     <>
       <section id="home">

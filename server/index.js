@@ -1,10 +1,8 @@
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv").config();
-const mysql = require("mysql");
 const cors = require("cors");
-const ezeyRouting = require("./routing/ezeyNFT");
-// const db = require("../server/connectDB/DB");
+const ezeyRouting = require("./routing/EzeyNFT");
 
 app.use(cors());
 app.use(express.json());

@@ -1,0 +1,14 @@
+#simpleCon{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-end;
+    margin-left: -70%;
+
+
+}
+@media (max-width: 800px) {
+    #simpleCon{
+        display: flex;
+        flex-direction: column;
+    }
+}
