@@ -10,7 +10,6 @@ const useEzeyNFTFactory = () => {
   let ezeyNFT = new web3.eth.Contract(
     useEzeyNFTJSON.abi,
     "0xa36Eb0aa24Ea65306d4f2fEE5C692F2a7E505507"
-    // "0xc717a22D58616E1DE3e577AAC9caeE36784A484A"
   );
 
   async function createNFT(nftName, nftSymbol) {
@@ -40,7 +39,7 @@ const useEzeyNFTFactory = () => {
       .send({ from: account });
     return URI;
   }
- 
+
   async function getWalletID() {
     const walletID = await ezeyNFT.methods.getWalletID(account).call();
     return walletID;

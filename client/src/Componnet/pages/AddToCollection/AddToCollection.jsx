@@ -1,9 +1,9 @@
+import "./AddToCollection.css";
 import { useGlobalContext } from "../../../UseContext/UseContext";
 import Spinner from "../../fetchers/Spinner/Spinner";
 import Methods from "../../../Methods/Methods";
 import { useEffect } from "react";
 import { useState } from "react";
-import "./AddToCollection.css";
 const AddToCollection = () => {
   const [listNFT, setListNFT] = useState([]);
   const {
@@ -34,13 +34,18 @@ const AddToCollection = () => {
   return (
     <section id="contact">
       <div className="container">
-        <div className="sidenav">
+      <div id="sideN" className="sidenav">
           <div>
-            {!collectionList.length === 0 && <h3>collection's</h3>}
-            <p>{collectionList && collectionList}</p>
+            <p id="titleCN">C.N List</p>
+            <p
+              onClick={() => {
+                console.log(listNFT);
+              }}
+            >
+              {collectionList && collectionList}
+            </p>
           </div>
         </div>
-
         <div className="row">
           <div className="col-md-offset-2 col-md-8 col-sm-12">
             <div className="section-title">
