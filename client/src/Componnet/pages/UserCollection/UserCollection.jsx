@@ -64,7 +64,7 @@ const UserCollection = () => {
         </div>
         {!isLoading && (
           <div className="gallery-image">
-            {!data.length == 0 ? (
+            {!data.length === 0 ? (
               data?.map((item) => {
                 return (
                   <>

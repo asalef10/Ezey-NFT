@@ -9,7 +9,7 @@ const NavBar = () => {
   return (
     <>
       <nav>
-        <a className="logo" href="#">
+        <a className="logo" target={"_blank"} href={`https://mumbai.polygonscan.com/address/${account}`}>
           {account && addressShortcut(account)}
         </a>
         <ul className="nav-bar">

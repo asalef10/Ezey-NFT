@@ -4,6 +4,7 @@ import Spinner from "../../fetchers/Spinner/Spinner";
 import Methods from "../../../Methods/Methods";
 import { useEffect } from "react";
 import { useState } from "react";
+import Steps from "../../fetchers/Steps/Steps";
 const AddToCollection = () => {
   const [listNFT, setListNFT] = useState([]);
   const {
@@ -32,6 +33,8 @@ const AddToCollection = () => {
     );
   });
   return (
+    <>
+      <Steps step1={"active"} text="Search Collection" />
     <section id="contact">
       <div className="container">
       <div id="sideN" className="sidenav">
@@ -41,7 +44,7 @@ const AddToCollection = () => {
               onClick={() => {
                 console.log(listNFT);
               }}
-            >
+              >
               {collectionList && collectionList}
             </p>
           </div>
@@ -73,7 +76,7 @@ const AddToCollection = () => {
                       className="form-control"
                       placeholder="DBZ"
                       required
-                    />
+                      />
                   </div>
                   <div className="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
                     <input
@@ -83,7 +86,7 @@ const AddToCollection = () => {
                       className="form-control submit"
                       id="submit"
                       value="Search Collection"
-                    />
+                      />
                   </div>
                 </div>
               </div>
@@ -92,6 +95,7 @@ const AddToCollection = () => {
         </div>
       </div>
     </section>
+                      </>
   );
 };
 export default AddToCollection;

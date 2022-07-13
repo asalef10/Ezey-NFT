@@ -14,72 +14,70 @@ const Methods = () => {
     inputDescription,
     inputURI,
     setIsLoading,
-   
+
     handleStatues,
   } = useGlobalContext();
 
-
-  
-  const { createNFT, getNftAddress, getContractAddressBySymbol,   } =
+  const { createNFT, getNftAddress, getContractAddressBySymbol } =
     useEzeyNFTFactory();
 
   const createCollection = async () => {
-    try {
-      if (!account) {
-        alert("connect metaMask");
-      } else {
-        if (inputName && inputSymbol) {
-          setIsLoading(true);
-          await createNFT(inputName, inputSymbol);
-          setIsLoading(false);
-          handleStatues("The collection was created successfully", "green");
-          setTimeout(() => {
-            history("/Create-NFT");
-          }, 3000);
-
-          console.log(inputName);
-        }
+    if (!account) {
+      alert("connect metaMask");
+    } else {
+      if (inputName && inputSymbol) {
+        setIsLoading(true);
+        createNFT(inputName, inputSymbol)
+          .then(() => {
+            handleStatues("The collection was created successfully", "green");
+            setTimeout(() => {
+              history("/Create-NFT");
+            }, 3000);
+          })
+          .catch((error) => {
+            console.log(error);
+            handleStatues(
+              "There was an error creating the collection. Try again",
+              "red"
+            );
+          })
+          .finally(() => {
+            setIsLoading(false);
+          });
       }
-    } catch (error) {
-      setIsLoading(false);
-      handleStatues(
-        "There was an error creating the collection. Try again",
-        "red"
-      );
-      console.log(error);
     }
   };
 
-  const mintNFT = async () => {
-    let contractAddressMint;
-    try {
-      if (!account) {
-        alert("connect MetaMask");
-      } else {
-        setIsLoading(true);
-        if (isFindCollection) {
-          contractAddressMint = oldContractAddress;
-        } else {
-          let newContractAddress = await getNftAddress(account);
-          contractAddressMint = newContractAddress;
-          await UseMintEzeyNFT(
-            contractAddressMint,
-            account,
-            inputURI,
-            inputDescription
-          );
-          handleStatues("Uploading of NFT was successful. You can upload more NFT collections", "green");
-        }
+  const handleMint = (contract) => {
+    UseMintEzeyNFT(contract, account, inputURI, inputDescription)
+      .then(() => {
+        handleStatues(
+          "Uploading of NFT was successful. You can upload more NFT collections",
+          "green"
+        );
+      })
+      .catch((error) => {
+        handleStatues(
+          "There was an error creating the collection. Try again",
+          "red"
+        );
+      })
+      .finally(() => {
         setIsLoading(false);
+      });
+  };
+  const mintNFT = async () => {
+    if (!account) {
+      alert("Connect MetaMask");
+    } else {
+      setIsLoading(true);
+      if (isFindCollection) {
+        handleMint(oldContractAddress);
+      } else {
+        getNftAddress(account).then((account) => {
+          handleMint(account);
+        });
       }
-    } catch (error) {
-      setIsLoading(false);
-      handleStatues(
-        "There was an error creating the collection. Try again",
-        "red"
-      );
-
-      console.log(error);
     }
   };
 

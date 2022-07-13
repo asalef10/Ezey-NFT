@@ -19,48 +19,48 @@ const ContainerFooter = () => {
             <h2>Ezey-NFT</h2>
             <div className="wow fadeInUp" data-wow-delay="0.3s">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                luctus lacus nulla, eget varius justo tristique ut. Etiam a
-                tellus magna.
+                Ezey-NFT was created by a full-stack blockchain developer &nbsp;
+                <a href="https://www.linkedin.com/in/asalef-alena-a043251ba/">
+                  Asalf Alena
+                </a>
               </p>
-              <p className="copyright-text">
-                Copyright &copy; 2016 Your Company Designed by TemplateMo
-              </p>
+              <p className="copyright-text">Copyright &copy; 2022</p>
             </div>
           </div>
 
           <div className="col-md-1 col-sm-1"></div>
 
           <div className="col-md-4 col-sm-5">
-            <h2>Our Studio</h2>
-            <p className="wow fadeInUp" data-wow-delay="0.6s">
-              120-240 aliquam augue libero, Convallis in vulputate 10220 San
-              Francisco, CA, USA
-            </p>
+            <h2>Contact info</h2>
+            <p className="wow fadeInUp" data-wow-delay="0.6s"></p>
             <ul className="social-icon">
               <li>
                 <a
-                  href="#"
+                  target={"_blank"}
+                  href="https://www.facebook.com/profile.php?id=100005185893002"
                   className="fa fa-facebook wow bounceIn"
                   data-wow-delay="0.9s"
                 ></a>
               </li>
               <li>
                 <a
-                  href="#"
-                  className="fa fa-twitter wow bounceIn"
+                  target={"_blank"}
+                  href="https://github.com/asalef10"
+                  className="fa fa-github"
                   data-wow-delay="1.2s"
                 ></a>
               </li>
               <li>
                 <a
-                  href="#"
-                  className="fa fa-behance wow bounceIn"
+                  target={"_blank"}
+                  href="https://www.linkedin.com/in/asalef-alena-a043251ba/"
+                  className="fa fa-linkedin"
                   data-wow-delay="1.4s"
                 ></a>
               </li>
               <li>
                 <a
+                  target={"_blank"}
                   href="#"
                   className="fa fa-dribbble wow bounceIn"
                   data-wow-delay="1.6s"
@@ -73,4 +73,4 @@ const ContainerFooter = () => {
     </footer>
   );
 };
-export default ContainerFooter
+export default ContainerFooter;
