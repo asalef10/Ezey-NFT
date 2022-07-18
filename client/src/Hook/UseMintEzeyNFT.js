@@ -7,9 +7,14 @@ const UseMintEzeyNFT = async (contractAddress, userAccount, nftURI,Description) 
   let ezeyNFT = new web3.eth.Contract(useEzeyNFTJSON.abi, contractAddress);
 
 
+  let estimateGas = await ezeyNFT.methods
+  .mintNFT(nftURI,Description)
+  .estimateGas({ from: userAccount });
+
+
   const mint = await ezeyNFT.methods
   .mintNFT(nftURI,Description)
-  .send({ from: userAccount });
+  .send({ from: userAccount, gas: estimateGas, gasPrice: "40000000000" });
   return mint;
 
 

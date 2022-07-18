@@ -111,7 +111,7 @@ const Methods = () => {
       setIsLoading(false);
 
       handleStatues(
-        "There was an error creating the collection. Try again",
+        "There was an error search the collection. Try again",
         "red"
       );
       console.log(error);

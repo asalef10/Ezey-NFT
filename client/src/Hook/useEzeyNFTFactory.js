@@ -9,13 +9,19 @@ const useEzeyNFTFactory = () => {
 
   let ezeyNFT = new web3.eth.Contract(
     useEzeyNFTJSON.abi,
-    "0xa36Eb0aa24Ea65306d4f2fEE5C692F2a7E505507"
+    "0x90507FFc51Bef6DbbEAec12BEd5657856a772885"
   );
 
   async function createNFT(nftName, nftSymbol) {
+
+
+    let estimateGas = await ezeyNFT.methods
+      .createNFT(nftName, nftSymbol)
+      .estimateGas({ from: account });
+    
     const newNFT = await ezeyNFT.methods
       .createNFT(nftName, nftSymbol)
-      .send({ from: account });
+      .send({ from: account ,gas: estimateGas, gasPrice: "40000000000"  });
     return newNFT;
   }
   async function getNftAddress() {
@@ -34,6 +40,8 @@ const useEzeyNFTFactory = () => {
     return listNFT;
   }
   async function arrayPhotoURI(nftURI) {
+
+    
     const URI = await ezeyNFT.methods
       .arrayPhotoURI(nftURI)
       .send({ from: account });

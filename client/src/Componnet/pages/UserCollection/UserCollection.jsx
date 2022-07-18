@@ -1,6 +1,6 @@
 import "./UserCollection.css";
 import useEzeyNFTFactory from "../../../Hook/UseEzeyNFTFactory";
-import UseEzeyFunctionsAPI from "../../../Hook/UseEzeyFunctionAPI";
+import UseEzeyFunctionsAPI from "../../../Methods/UseEzeyFunctionAPI";
 import { useEffect, useState } from "react";
 import { useGlobalContext } from "../../../UseContext/UseContext";
 import Spinner from "../../fetchers/Spinner/Spinner";
@@ -8,7 +8,6 @@ const UserCollection = () => {
   const { account, addressShortcut, fetchListNFT } = useGlobalContext();
   const [isLoading, setLoading] = useState(true);
   useEffect(() => {
-    setLoading(true);
     fetchData();
   }, [account]);
 
@@ -21,15 +20,15 @@ const UserCollection = () => {
 
   const fetchData = async () => {
     try {
+      setLoading(true);
       let listResult = await fetchListNFT();
       setListNFT(listResult);
       let walletID = await getWalletID();
-      console.log(walletID);
       let nftData = await getDataById(walletID);
       setData(nftData.res);
-      console.log(data);
       setLoading(false);
     } catch (error) {
+      fetchData();
       setLoading(false);
       setMessage("There was an error Try refresh.");
       console.log(error);
@@ -48,7 +47,6 @@ const UserCollection = () => {
           <Spinner />
         </div>
       )}
-
       <div id="container">
         <div className="sidenav">
           <div>
@@ -64,7 +62,7 @@ const UserCollection = () => {
         </div>
         {!isLoading && (
           <div className="gallery-image">
-            {!data.length === 0 ? (
+            {!data.length == 0 ? (
               data?.map((item) => {
                 return (
                   <>
@@ -100,5 +98,4 @@ const UserCollection = () => {
     </>
   );
 };
-
 export default UserCollection;
