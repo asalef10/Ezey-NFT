@@ -7,7 +7,7 @@ export const MyContext = createContext();
 export const MyProvider = MyContext.Provider;
 
 const UseContext = ({ children }) => {
-  const { listUserNFTs} = useEzeyNFTFactory();
+  const { listUserNFTs } = useEzeyNFTFactory();
   const injected = new InjectedConnector({
     supportedChainIds: [1, 3, 4, 5, 42, 137, 56, 43114, 80001, 421611],
   });
@@ -22,6 +22,7 @@ const UseContext = ({ children }) => {
   const [messageStatues, setMessageStatues] = useState("");
   const [colorMessage, setColorMessage] = useState("");
   const [contractAddress, setContractAddress] = useState("");
+  const [successfullyNFT, setSuccessfullyNFT] = useState([]);
 
   const handleStatues = (message, colorMessage) => {
     setMessageStatues(message);
@@ -49,11 +50,11 @@ const UseContext = ({ children }) => {
       );
     }
   };
-const fetchListNFT =async ()=>{
-  let itemsCollection = await listUserNFTs();
-  return itemsCollection
-}
-  
+  const fetchListNFT = async () => {
+    let itemsCollection = await listUserNFTs();
+    return itemsCollection;
+  };
+
   const values = {
     connectMetaMask,
     account,
@@ -75,7 +76,9 @@ const fetchListNFT =async ()=>{
     contractAddress,
     setContractAddress,
     handleStatues,
-    fetchListNFT
+    fetchListNFT,
+    successfullyNFT,
+    setSuccessfullyNFT
   };
   return <MyProvider value={values}>{children}</MyProvider>;
 };

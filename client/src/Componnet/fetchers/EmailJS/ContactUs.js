@@ -1,17 +1,24 @@
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
-
+import { useGlobalContext } from "../../../UseContext/UseContext";
 const ContactUs = () => {
+  const { setIsLoading } = useGlobalContext();
   const form = useRef();
 
   const sendEmail = (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     emailjs
-      .sendForm("service_0a919rh", "template_poaojzi", form.current, "ZWdzsRCcamhj1HENq")
+      .sendForm(
+        "service_0a919rh",
+        "template_poaojzi",
+        form.current,
+        "ZWdzsRCcamhj1HENq"
+      )
       .then(
         (result) => {
-              alert("The Message Sent");
+          setIsLoading(false);
+          alert("The Message Sent");
 
           console.log(result.text);
         },

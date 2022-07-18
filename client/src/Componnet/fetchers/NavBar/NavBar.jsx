@@ -25,10 +25,10 @@ const NavBar = () => {
           </li>
 
           <li className="nav-bar_item">
-            <Link className="navBar-btn" to="My-Collection">My Collection</Link>
+            <Link className="navBar-btn" to="/My-Collection">My Collection</Link>
           </li>
           <li className="nav-bar_item">
-            <a className="navBar-btn" href="">contact</a>
+            <Link className="navBar-btn" to="/Contact-Us">contact</Link>
           </li>
         </ul>
       </nav>

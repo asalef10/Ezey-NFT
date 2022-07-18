@@ -14,8 +14,8 @@ const Methods = () => {
     inputDescription,
     inputURI,
     setIsLoading,
-
     handleStatues,
+    setSuccessfullyNFT
   } = useGlobalContext();
 
   const { createNFT, getNftAddress, getContractAddressBySymbol } =
@@ -55,6 +55,7 @@ const Methods = () => {
           "Uploading of NFT was successful. You can upload more NFT collections",
           "green"
         );
+        setSuccessfullyNFT(oldArray=>[...oldArray,inputURI])
       })
       .catch((error) => {
         handleStatues(

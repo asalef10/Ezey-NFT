@@ -50,7 +50,7 @@ const UserCollection = () => {
       <div id="container">
         <div className="sidenav">
           <div>
-            <p id="titleCN">C.N List</p>
+            <p id="titleCN">Collection List</p>
             <p
               onClick={() => {
                 console.log(listNFT);

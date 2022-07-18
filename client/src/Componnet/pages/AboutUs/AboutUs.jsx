@@ -19,7 +19,7 @@ const AboutUs = () => {
                     About Ezey-NFT
                   </h1>
                   <h3 className="wow fadeInUp" data-wow-delay="0.4s">
-                    Comila Studio is based in Hong Kong
+                    Ezey-NFT is based in Israel
                   </h3>
                 </div>
                 <div className="wow fadeInUp" data-wow-delay="0.6s">

@@ -1,31 +1,44 @@
 import { useEffect } from "react";
 import Methods from "../../../Methods/Methods";
-import { useNavigate } from "react-router-dom";
-
 import { useGlobalContext } from "../../../UseContext/UseContext";
 import Spinner from "../../fetchers/Spinner/Spinner";
 import Steps from "../../fetchers/Steps/Steps";
-import { useRef } from "react";
+import "./CreateNFT.css";
 const CreateNFT = () => {
   const {
     setInputDescription,
     setInputURI,
     isLoading,
+    setIsLoading,
     colorMessage,
     messageStatues,
-    account
+    successfullyNFT,
   } = useGlobalContext();
   const { mintNFT } = Methods();
-  const history = useNavigate();
-  const isInitialMount = useRef(true);
- 
-
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
   return (
     <>
-          <Steps step2={"active"}/>
-
+      <Steps step2={"active"} />
+  
       <section id="contact">
+        
         <div className="container">
+        {
+            <ul id="ulNFT">
+              {successfullyNFT.length > 0 && (
+                <h4 id="titleNFT">Rose successfully</h4>
+              )}
+              {successfullyNFT.map((item) => {
+                return (
+                  <li>
+                    <img id="imgNFT" src={item} alt="img" />
+                  </li>
+                );
+              })}
+            </ul>
+          }
           <div className="row">
             <div className="col-md-offset-2 col-md-8 col-sm-12">
               <div className="section-title">

@@ -19,7 +19,7 @@ const ContainerFooter = () => {
             <h2>Ezey-NFT</h2>
             <div className="wow fadeInUp" data-wow-delay="0.3s">
               <p>
-                Ezey-NFT was created by a Full-Stack Blockchain developer &nbsp;
+                Ezey-NFT was created by a Full-Stack Blockchain Developer &nbsp;
                 <a href="https://www.linkedin.com/in/asalef-alena-a043251ba/">
                   Asalef Alena
                 </a>
