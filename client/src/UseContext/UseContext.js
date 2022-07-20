@@ -23,6 +23,7 @@ const UseContext = ({ children }) => {
   const [colorMessage, setColorMessage] = useState("");
   const [contractAddress, setContractAddress] = useState("");
   const [successfullyNFT, setSuccessfullyNFT] = useState([]);
+  const [buttonIsOn, setButtonIsOn] = useState(false);
 
   const handleStatues = (message, colorMessage) => {
     setMessageStatues(message);
@@ -78,7 +79,9 @@ const UseContext = ({ children }) => {
     handleStatues,
     fetchListNFT,
     successfullyNFT,
-    setSuccessfullyNFT
+    setSuccessfullyNFT,
+    buttonIsOn,
+     setButtonIsOn,
   };
   return <MyProvider value={values}>{children}</MyProvider>;
 };

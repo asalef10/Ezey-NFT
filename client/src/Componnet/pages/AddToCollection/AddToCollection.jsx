@@ -15,9 +15,12 @@ const AddToCollection = () => {
     setIsLoading,
     fetchListNFT,
     account,
+    buttonIsOn,
+    setButtonIsOn
   } = useGlobalContext();
   const { addItemToCollection } = Methods();
   useEffect(() => {
+    setButtonIsOn(false)
     setIsLoading(false);
     fetchList();
   }, [account]);
@@ -82,6 +85,7 @@ const AddToCollection = () => {
                     </div>
                     <div className="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
                       <input
+                        disabled={buttonIsOn}
                         onClick={addItemToCollection}
                         name="submit"
                         type="submit"

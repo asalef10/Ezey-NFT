@@ -5,18 +5,22 @@ import Spinner from "../../fetchers/Spinner/Spinner";
 import Steps from "../../fetchers/Steps/Steps";
 
 const CreateCollection = () => {
-  useEffect(() => {
-    setInputSymbol("");
-  }, []);
   const {
     setInputName,
     setInputSymbol,
     isLoading,
     messageStatues,
     colorMessage,
+    buttonIsOn,
+    setButtonIsOn
   } = useGlobalContext();
 
   const { createCollection } = Methods();
+
+  useEffect(() => {
+    setButtonIsOn(false);
+    setInputSymbol("");
+  }, []);
 
   return (
     <>
@@ -47,7 +51,8 @@ const CreateCollection = () => {
                       type="text"
                       className="form-control"
                       placeholder="Dragon Ball Z"
-                      required
+                      required={true}
+
                     />
                   </div>
                   <div className="col-md-6 col-sm-6">
@@ -59,11 +64,12 @@ const CreateCollection = () => {
                       type="email"
                       className="form-control"
                       placeholder="DBZ"
-                      required
+                      required={true}
                     />
                   </div>
                   <div className="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
                     <input
+                      disabled={buttonIsOn}
                       onClick={createCollection}
                       name="submit"
                       type="submit"

@@ -15,7 +15,8 @@ const Methods = () => {
     inputURI,
     setIsLoading,
     handleStatues,
-    setSuccessfullyNFT
+    setSuccessfullyNFT,
+    setButtonIsOn,
   } = useGlobalContext();
 
   const { createNFT, getNftAddress, getContractAddressBySymbol } =
@@ -26,13 +27,14 @@ const Methods = () => {
       alert("connect metaMask");
     } else {
       if (inputName && inputSymbol) {
+        setButtonIsOn(true);
         setIsLoading(true);
         createNFT(inputName, inputSymbol)
           .then(() => {
             handleStatues("The collection was created successfully", "green");
             setTimeout(() => {
               history("/Create-NFT");
-            }, 3000);
+            }, 1000);
           })
           .catch((error) => {
             console.log(error);
@@ -42,20 +44,24 @@ const Methods = () => {
             );
           })
           .finally(() => {
+            setButtonIsOn(false);
             setIsLoading(false);
           });
+      } else {
+        handleStatues("The fields must be filled out", "red");
       }
     }
   };
 
   const handleMint = (contract) => {
+    setButtonIsOn(false);
     UseMintEzeyNFT(contract, account, inputURI, inputDescription)
       .then(() => {
         handleStatues(
           "Uploading of NFT was successful. You can upload more NFT collections",
           "green"
         );
-        setSuccessfullyNFT(oldArray=>[...oldArray,inputURI])
+        setSuccessfullyNFT((oldArray) => [...oldArray, inputURI]);
       })
       .catch((error) => {
         handleStatues(
@@ -64,6 +70,7 @@ const Methods = () => {
         );
       })
       .finally(() => {
+        setButtonIsOn(false);
         setIsLoading(false);
       });
   };
@@ -87,10 +94,15 @@ const Methods = () => {
       if (!account) {
         alert("connect metamask");
       } else {
-        setIsLoading(true);
+        if (!inputSymbol) {
+          handleStatues("The fields must be filled out", "red");
+        }else{
 
-        let contract = await getContractAddressBySymbol(inputSymbol);
-        if (contract === "0x0000000000000000000000000000000000000000") {
+          setButtonIsOn(false);
+          setIsLoading(true);
+
+          let contract = await getContractAddressBySymbol(inputSymbol);
+          if (contract === "0x0000000000000000000000000000000000000000") {
           handleStatues(
             "The Symbol not found, you can create new NFT.",
             "#f89797"
@@ -101,14 +113,17 @@ const Methods = () => {
           handleStatues(
             "The Symbol found, you can add new NFT to collection.",
             "green"
-          );
-          setTimeout(() => {
-            history("/Create-NFT");
-          }, 3000);
+            );
+            setTimeout(() => {
+              history("/Create-NFT");
+            }, 1000);
+          }
         }
       }
+      setButtonIsOn(false);
       setIsLoading(false);
     } catch (error) {
+      setButtonIsOn(false);
       setIsLoading(false);
 
       handleStatues(

@@ -13,22 +13,25 @@ const CreateNFT = () => {
     colorMessage,
     messageStatues,
     successfullyNFT,
+    buttonIsOn,
+    setButtonIsOn,
+    inputSymbol,
   } = useGlobalContext();
   const { mintNFT } = Methods();
   useEffect(() => {
+    setButtonIsOn(false);
     setIsLoading(false);
   }, []);
   return (
     <>
       <Steps step2={"active"} />
-  
+
       <section id="contact">
-        
         <div className="container">
-        {
+          {
             <ul id="ulNFT">
               {successfullyNFT.length > 0 && (
-                <h4 id="titleNFT">Rose successfully</h4>
+                <h4 id="titleNFT">Added successfully</h4>
               )}
               {successfullyNFT.map((item) => {
                 return (
@@ -46,9 +49,8 @@ const CreateNFT = () => {
                   Create NFT
                 </h1>
                 <p className="wow fadeInUp" data-wow-delay="0.6s">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-                  diam nonummy nibh euismod tincidunt ut laoreet. Dolore magna
-                  aliquam erat volutpat.
+                  Now you can add items to the collection{" "}
+                  {<h4> --{inputSymbol}--</h4>}
                 </p>
                 {<h5 style={{ color: colorMessage }}>{messageStatues}</h5>}
                 {isLoading && <Spinner />}
@@ -81,6 +83,7 @@ const CreateNFT = () => {
                   </div>
                   <div className="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
                     <input
+                      disabled={buttonIsOn}
                       onClick={mintNFT}
                       name="submit"
                       type="submit"

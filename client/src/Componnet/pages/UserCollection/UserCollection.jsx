@@ -40,7 +40,7 @@ const UserCollection = () => {
   });
   return (
     <>
-      <p className="heading">My Collection</p>
+      <p className="heading">My Collections</p>
 
       {isLoading && (
         <div id="spinner">
@@ -62,7 +62,7 @@ const UserCollection = () => {
         </div>
         {!isLoading && (
           <div className="gallery-image">
-            {!data.length == 0 ? (
+            {data[0] ? (
               data?.map((item) => {
                 return (
                   <>
@@ -70,11 +70,11 @@ const UserCollection = () => {
                       <img src={item?.NFTUrl} alt="collection NFT" />
                       <div className="transparent-box">
                         <div className="caption">
-                          <p>{item.NFTSymbol}</p>
-                          <p className="opacity-low">
+                          <p style={{color:"aliceblue"}}>{item.name}</p>
+                          <p style={{color:"aliceblue"}} className="opacity-low">
                             {addressShortcut(item.addressWallet)}
                           </p>
-                          <p className="opacity-low">Ezey-NFT</p>
+                          <p style={{color:"aliceblue"}} className="opacity-low">{item.NFTSymbol}</p>
                         </div>
                       </div>
                     </div>
@@ -85,12 +85,12 @@ const UserCollection = () => {
               message ? (
                 <h4>{message}</h4>
               ) : (
-                <h4>You haven't yet created a NFT image collection</h4>
+                <h4>You haven't yet created a NFT image collection.</h4>
               )
             ) : message ? (
               <h4>{message}</h4>
             ) : (
-              <h4>There are no photos in the collection you created</h4>
+              <h4>There are no photos in the collection you created.</h4>
             )}
           </div>
         )}

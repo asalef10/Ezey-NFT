@@ -38,7 +38,7 @@ const CarouselNFT = () => {
             }
             return (
               <>
-                <div key={count} className="slide imgs ">
+                <div key={count++} className="slide imgs ">
                   <img id="img" src={item} alt="img" />
                 </div>
               </>

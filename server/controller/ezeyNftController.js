@@ -158,11 +158,13 @@ function deleteItemInTable(length) {
     // }
   });
 }
-listenEvent();
+// listenEvent();
 
 module.exports = {
   insertToCollectionTable,
   getAllData,
   walletExist,
   getDataById,
+  listenEvent
+
 };

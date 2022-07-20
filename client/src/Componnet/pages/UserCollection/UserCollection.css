@@ -79,9 +79,12 @@
 }
 
 .opacity-low {
+  color: aliceblue !important;
   opacity: 0.5 !important;
 }
-
+#textColor {
+  color: white !important;
+}
 .sidenav {
   height: auto;
   width: 16%;
@@ -124,6 +127,6 @@
   text-align: center;
   font-size: initial;
 }
-#container{
+#container {
   display: flex;
 }
