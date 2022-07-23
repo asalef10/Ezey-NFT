@@ -1,1 +1,1 @@
-# ezeyNFT
+# EzeyNFT

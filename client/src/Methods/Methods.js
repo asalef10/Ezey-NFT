@@ -54,7 +54,6 @@ const Methods = () => {
   };
 
   const handleMint = (contract) => {
-    setButtonIsOn(false);
     UseMintEzeyNFT(contract, account, inputURI, inputDescription)
       .then(() => {
         handleStatues(
@@ -77,11 +76,16 @@ const Methods = () => {
   const mintNFT = async () => {
     if (!account) {
       alert("Connect MetaMask");
+    } else if (!inputURI) {
+      handleStatues("The fields must be filled out", "red");
     } else {
-      setIsLoading(true);
       if (isFindCollection) {
+        setButtonIsOn(true);
+        setIsLoading(true);
         handleMint(oldContractAddress);
       } else {
+        setButtonIsOn(true);
+        setIsLoading(true);
         getNftAddress(account).then((account) => {
           handleMint(account);
         });
@@ -96,23 +100,22 @@ const Methods = () => {
       } else {
         if (!inputSymbol) {
           handleStatues("The fields must be filled out", "red");
-        }else{
-
+        } else {
           setButtonIsOn(false);
           setIsLoading(true);
 
           let contract = await getContractAddressBySymbol(inputSymbol);
           if (contract === "0x0000000000000000000000000000000000000000") {
-          handleStatues(
-            "The Symbol not found, you can create new NFT.",
-            "#f89797"
-          );
-        } else {
-          isFindCollection = true;
-          oldContractAddress = contract;
-          handleStatues(
-            "The Symbol found, you can add new NFT to collection.",
-            "green"
+            handleStatues(
+              "The Symbol not found, you can create new NFT.",
+              "#f89797"
+            );
+          } else {
+            isFindCollection = true;
+            oldContractAddress = contract;
+            handleStatues(
+              "The Symbol found, you can add new NFT to collection.",
+              "green"
             );
             setTimeout(() => {
               history("/Create-NFT");
