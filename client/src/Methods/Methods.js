@@ -56,6 +56,7 @@ const Methods = () => {
   const handleMint = (contract) => {
     UseMintEzeyNFT(contract, account, inputURI, inputDescription)
       .then(() => {
+
         handleStatues(
           "Uploading of NFT was successful. You can upload more NFT collections",
           "green"

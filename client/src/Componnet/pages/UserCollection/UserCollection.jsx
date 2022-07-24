@@ -48,7 +48,7 @@ const UserCollection = () => {
         </div>
       )}
       <div id="container">
-        <div className="sidenav">
+        <div id="idSideNav" className="sidenav">
           <div>
             <p id="titleCN">Collection List</p>
             <p

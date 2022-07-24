@@ -130,3 +130,7 @@
 #container {
   display: flex;
 }
+#idSideNav{
+  min-width: max-content;
+
+}
