@@ -10,7 +10,10 @@ const wsProvider = new Web3.providers.WebsocketProvider(
 
 HDWalletProvider.prototype.on = wsProvider.on.bind(wsProvider);
 let walletKEY = process.env.WALLET_KEY;
-let provider = new HDWalletProvider(walletKEY, wsProvider);
+let provider = new HDWalletProvider(
+  walletKEY,
+  wsProvider
+);
 
 const web3 = new Web3(provider);
 
@@ -18,20 +21,23 @@ let name;
 let symbol;
 let addressWallet;
 let walletID;
+let tokenIds;
 let tokenURI;
 let description;
+let contractAddress;
 async function Event_Handler(err, data) {
   let result = data.returnValues;
   if (!err) {
-    console.log(result);
     name = result.name;
     symbol = result.symbol;
     tokenURI = result.tokenURI;
     description = result.description;
     walletID = result.walletID;
+    tokenIds = result._tokenIds;
+    contractAddress = result.contractAddress;
     addressWallet = result.addressWallet;
     console.log(result);
-    insertToCollectionTable();
+    insertData();
   }
 }
 
@@ -39,7 +45,7 @@ async function listenEvent() {
   try {
     let eventEmiterContract = new web3.eth.Contract(
       EzeyNFTFEventABI.abi,
-      "0x2Bf63F3dbfdABe7103B1cbD9982Ac62356295B7E"
+      "0x8f6BF5227dEcfc5249500235361F845e1b4dE3Fc"
     );
     await eventEmiterContract.events.newCollection(Event_Handler);
   } catch (error) {
@@ -47,124 +53,92 @@ async function listenEvent() {
   }
 }
 
-async function insertToCollectionTable(req, res) {
+async function insertData(req, res) {
   try {
-    async function insertToTable() {
-      db.query(
-        `INSERT INTO ezeyNFT.collectionNFT (NFTSymbol,NFTUrl,IDAddressWallet,name,description) VALUES ('${symbol}','${tokenURI}','${walletID}','${name}','${description}')  `,
-        (err, newResult) => {
-          if (err) throw err;
-          console.log(newResult);
-          return newResult;
-        }
-      );
-    }
-
     db.query(
       `SELECT * FROM ezeyNFT.userNFT WHERE addressWallet = '${addressWallet}'  `,
       async (err, result) => {
         if (err) {
           throw err;
-        } else if (result.length == 0) {
-          async function newUser() {
-            db.query(
-              `INSERT INTO ezeyNFT.userNFT (id,addressWallet) VALUES ('${walletID}','${addressWallet}')  `,
-              (err) => {
-                if (err) throw err;
-                return res;
-              }
-            );
-          }
+        } else if (!result[0]) {
           await newUser();
-
-          await insertToTable();
+          await insertToCollectionNFTable();
         } else {
-          await insertToTable();
+          await insertToCollectionNFTable();
         }
-        // console.log(result);
-        // res.send(result);
-        return result;
       }
     );
+    return { newResult: "The registration account was successfuly" };
   } catch (error) {
     console.log(error);
   }
 }
 
+async function newUser(req, res) {
+  try {
+    db.query(
+      `INSERT INTO ezeyNFT.userNFT (id,addressWallet) VALUES ('${walletID}','${addressWallet}')  `,
+      (err) => {
+        if (err) throw err;
+        console.log("The registration account was successful");
+        return { newResult: "The registration account was successful" };
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+}
+async function insertToCollectionNFTable(req, res) {
+  try {
+    db.query(
+      `INSERT INTO ezeyNFT.collectionNFT (NFTSymbol,NFTUrl,IDAddressWallet,name,description,tokenIds,contractAddress) VALUES ('${symbol}','${tokenURI}','${walletID}','${name}','${description}','${tokenIds}','${contractAddress}')  `,
+      (err) => {
+        if (err) throw err;
+      }
+    );
+    return { newResult: "The registration was successfuly" };
+  } catch (err) {
+    console.log(err);
+    res.json({ err: error });
+  }
+}
+
 function getAllData(req, res) {
-  db.query(
-    `select * from ezeyNFT.userNFT INNER JOIN ezeyNFT.collectionNFT ON collectionNFT.IDAddressWallet=userNFT.id  `,
-    (err, result) => {
-      if (err) throw err;
-      console.log(result);
-      res.json({ res: result });
-      return res;
-    }
-  );
+  try {
+    db.query(
+      `select * from ezeyNFT.userNFT INNER JOIN ezeyNFT.collectionNFT ON collectionNFT.IDAddressWallet=userNFT.id  `,
+      (err, result) => {
+        if (err) throw err;
+        return res.status(200).json({ res: result });
+      }
+    );
+  } catch (err) {
+    res.json(err);
+  }
 }
 
 function getDataById(req, res) {
-  let IDAddressWallet = req.body.IDAddressWallet;
-  db.query(
-    `select * from ezeyNFT.userNFT INNER JOIN ezeyNFT.collectionNFT ON collectionNFT.IDAddressWallet =userNFT.id where IDAddressWallet = ${IDAddressWallet} order by userNFT.id`,
-    (err, result) => {
-      if (err) throw err;
-      console.log(result);
-      res.json({ res: result });
-      return res;
-    }
-  );
+  try {
+    let IDAddressWallet = req.body.IDAddressWallet;
+    db.query(
+      `select * from ezeyNFT.userNFT INNER JOIN ezeyNFT.collectionNFT ON collectionNFT.IDAddressWallet =userNFT.id where IDAddressWallet = ${IDAddressWallet} order by userNFT.id`,
+      (err, result) => {
+        if (err) throw err;
+        console.log(result);
+        res.json({ res: result });
+        return res;
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+  }
 }
-
-function upDateDetails(req, res) {
-  let IDAddressWallet = req.body.IDAddressWallet;
-  let NFTUrl = req.body.NFTUrl;
-  let idToUpdate = req.body.idToUpdate;
-
-  db.query(
-    `update ezeyNFT.collectionNFT set IDAddressWallet = ${IDAddressWallet}, NFTUrl=${NFTUrl} where id = ${idToUpdate}  `,
-    (err, result) => {
-      if (err) throw err;
-      console.log(result);
-      // res.send(result);
-      // return console.log(res);
-    }
-  );
-}
-
-function walletExist(req, res) {
-  let addressWallet = req.body.addressWallet;
-
-  db.query(
-    `SELECT * FROM ezeyNFT.userNFT WHERE addressWallet = '${addressWallet}'  `,
-    (err, result) => {
-      if (err) throw err;
-      console.log(result);
-      res.send(result);
-      return result;
-    }
-  );
-}
-
-function deleteItemInTable(length) {
-  db.connect(async function (err) {
-    if (err) throw err;
-    // for (let i = 0; i < 4; i++) {
-    var sql = `DELETE FROM  ezeyNFT.userNFT WHERE id = 5`;
-    await db.query(sql, (error, result, fields) => {
-      if (err) throw err;
-      // console.log("Number of records deleted: " + result.affectedRows);
-    });
-    // }
-  });
-}
-// listenEvent();
 
 module.exports = {
-  insertToCollectionTable,
+  insertData,
   getAllData,
-  walletExist,
   getDataById,
-  listenEvent
-
+  listenEvent,
 };

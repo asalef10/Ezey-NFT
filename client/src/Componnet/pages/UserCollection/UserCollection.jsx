@@ -4,6 +4,7 @@ import UseEzeyFunctionsAPI from "../../../Methods/UseEzeyFunctionAPI";
 import { useEffect, useState } from "react";
 import { useGlobalContext } from "../../../UseContext/UseContext";
 import Spinner from "../../fetchers/Spinner/Spinner";
+import Message from "../../fetchers/Message/Message";
 const UserCollection = () => {
   const { account, addressShortcut, fetchListNFT } = useGlobalContext();
   const [isLoading, setLoading] = useState(true);
@@ -17,7 +18,7 @@ const UserCollection = () => {
 
   const { getDataById } = UseEzeyFunctionsAPI();
   const { getWalletID } = useEzeyNFTFactory();
-
+  let countError = 0;
   const fetchData = async () => {
     try {
       setLoading(true);
@@ -28,7 +29,10 @@ const UserCollection = () => {
       setData(nftData.res);
       setLoading(false);
     } catch (error) {
-      fetchData();
+      countError += 1;
+      if (countError !== 20) {
+        fetchData();
+      }
       setLoading(false);
       setMessage("There was an error Try refresh.");
       console.log(error);
@@ -47,6 +51,11 @@ const UserCollection = () => {
           <Spinner />
         </div>
       )}
+      {data[0] && (
+        <Message
+          text={`To sell your collections in "openSea", click the image.`}
+        />
+      )}
       <div id="container">
         <div id="idSideNav" className="sidenav">
           <div>
@@ -60,23 +69,37 @@ const UserCollection = () => {
             </p>
           </div>
         </div>
+
         {!isLoading && (
-          <div className="gallery-image">
+          <div id={!data[0] ? "galleryID" : ""} className="gallery-image">
             {data[0] ? (
               data?.map((item) => {
                 return (
                   <>
-                    <div className="img-box">
-                      <img src={item?.NFTUrl} alt="collection NFT" />
-                      <div className="transparent-box">
-                        <div className="caption">
-                          <p style={{color:"aliceblue"}}>{item.name}</p>
-                          <p style={{color:"aliceblue"}} className="opacity-low">
-                            {addressShortcut(item.addressWallet)}
-                          </p>
-                          <p style={{color:"aliceblue"}} className="opacity-low">{item.NFTSymbol}</p>
+                    <div key={item.id} className="img-box">
+                      <a
+                        target={"_blank"}
+                        href={`https://testnets.opensea.io/assets/mumbai/${item.contractAddress}/${item.tokenIds}`}
+                      >
+                        <img src={item?.NFTUrl} alt="collection NFT" />
+                        <div className="transparent-box">
+                          <div className="caption">
+                            <p style={{ color: "aliceblue" }}>{item.name}</p>
+                            <p
+                              style={{ color: "aliceblue" }}
+                              className="opacity-low"
+                            >
+                              {addressShortcut(item.addressWallet)}
+                            </p>
+                            <p
+                              style={{ color: "aliceblue" }}
+                              className="opacity-low"
+                            >
+                              {item.NFTSymbol}
+                            </p>
+                          </div>
                         </div>
-                      </div>
+                      </a>
                     </div>
                   </>
                 );

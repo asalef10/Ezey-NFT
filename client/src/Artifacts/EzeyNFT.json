@@ -1,5 +1,5 @@
 {
-    "abi": [
+	"abi": [
         {
             "inputs": [
                 {
@@ -97,31 +97,6 @@
             "type": "event"
         },
         {
-            "anonymous": false,
-            "inputs": [
-                {
-                    "indexed": false,
-                    "internalType": "string",
-                    "name": "tokenURI",
-                    "type": "string"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "string",
-                    "name": "description",
-                    "type": "string"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "address",
-                    "name": "addressWallet",
-                    "type": "address"
-                }
-            ],
-            "name": "newCollection",
-            "type": "event"
-        },
-        {
             "inputs": [
                 {
                     "internalType": "address",
@@ -166,6 +141,19 @@
                     "internalType": "string",
                     "name": "",
                     "type": "string"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "contractAddress",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
                 }
             ],
             "stateMutability": "view",

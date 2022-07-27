@@ -9,7 +9,7 @@ export const MyProvider = MyContext.Provider;
 const UseContext = ({ children }) => {
   const { listUserNFTs } = useEzeyNFTFactory();
   const injected = new InjectedConnector({
-    supportedChainIds: [1, 3, 4, 5, 42, 137, 56, 43114, 80001, 421611],
+    supportedChainIds: [ 80001,1, 3, 4, 5, 42, 137, 56, 43114, 421611],
   });
 
   const { account, activate } = useWeb3React();

@@ -39,7 +39,7 @@ const UseEzeyFunctionsAPI = () => {
   const getDataById = async (id) => {
     const requestOptions = {
       method: "POST",
-      headers: {
+      headers: { 
         "content-length": "355",
         "content-type": "application/json; charset=utf-8",
       },

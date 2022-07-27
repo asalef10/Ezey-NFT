@@ -16,11 +16,11 @@ const AddToCollection = () => {
     fetchListNFT,
     account,
     buttonIsOn,
-    setButtonIsOn
+    setButtonIsOn,
   } = useGlobalContext();
   const { addItemToCollection } = Methods();
   useEffect(() => {
-    setButtonIsOn(false)
+    setButtonIsOn(false);
     setIsLoading(false);
     fetchList();
   }, [account]);
@@ -44,14 +44,8 @@ const AddToCollection = () => {
         <div className="container">
           <div id="sideN" className="sidenav">
             <div>
-              {collectionList.length > 0 && <p id="titleCN">Collection List</p>}
-              <p
-                onClick={() => {
-                  console.log(listNFT);
-                }}
-              >
-                {collectionList && collectionList}
-              </p>
+              {!collectionList[0] && <p id="titleCN">Collection List</p>}
+              {collectionList && collectionList}
             </div>
           </div>
           <div className="row">
@@ -65,7 +59,7 @@ const AddToCollection = () => {
                   quick, and easy. Choose the collection symbol and click on the
                   search button.
                 </p>
-                {<h5 style={{ color: colorMessage }}>{messageStatues}</h5>}
+                <h5 style={{ color: colorMessage }}>{messageStatues}</h5>
                 {isLoading && <Spinner />}
               </div>
               <div className="contact-form wow fadeInUp" data-wow-delay="1.0s">

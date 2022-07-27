@@ -130,7 +130,14 @@
 #container {
   display: flex;
 }
-#idSideNav{
+#idSideNav {
   min-width: max-content;
-
+}
+#galleryID {
+  margin-left: 20%;
+  margin-top: -2%;
+  background-color: #bef;
+  border: double;
+  color: black;
+  text-shadow: -1px -5px 20px black;
 }

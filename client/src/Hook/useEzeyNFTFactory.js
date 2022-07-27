@@ -9,7 +9,7 @@ const useEzeyNFTFactory = () => {
 
   let ezeyNFT = new web3.eth.Contract(
     useEzeyNFTJSON.abi,
-    "0x90507FFc51Bef6DbbEAec12BEd5657856a772885"
+    "0x0b3929f1b93e10b0092e78d3a8d1d47530b4c06b"
   );
 
   async function createNFT(nftName, nftSymbol) {

@@ -38,6 +38,12 @@
                     "internalType": "address",
                     "name": "addressWallet",
                     "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "_tokenIds",
+                    "type": "uint256"
                 }
             ],
             "name": "newCollection",
@@ -74,6 +80,11 @@
                     "internalType": "address",
                     "name": "addressWallet",
                     "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_tokenIds",
+                    "type": "uint256"
                 }
             ],
             "name": "newEvent",
