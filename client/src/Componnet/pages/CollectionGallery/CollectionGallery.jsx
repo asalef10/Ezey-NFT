@@ -22,14 +22,16 @@ const CollectionGallery = () => {
 
           <CarouselNFT />
 
-          <div
-            onClick={() => {
-              connectMetaMask();
-              window.scrollTo(0, 0);
-            }}
-            className="clearfix text-center col-md-12 col-sm-12"
-          >
+          <div className="clearfix text-center col-md-12 col-sm-12">
+            <Link to="/AllNFTs" className="btn btn-default smoothScroll">
+              More Image`s
+            </Link>
+
             <Link
+              onClick={() => {
+                connectMetaMask();
+                window.scrollTo(0, 0);
+              }}
               to="/Create-Collection"
               className="btn btn-default smoothScroll"
             >

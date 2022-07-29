@@ -1,11 +1,16 @@
 import "./NavBar.css";
 
-import { useContext } from "react";
-import { MyContext } from "../../../UseContext/UseContext";
+import { useGlobalContext } from "../../../UseContext/UseContext";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
-  const { addressShortcut, account } = useContext(MyContext);
+  const { addressShortcut, account, connectMetaMask } = useGlobalContext();
+  const alertMessage = () => {
+    if (!account) {
+      alert(`To get started, click the "Let's started" button in home page.`);
+    }
+  };
+
   return (
     <>
       <nav>
@@ -22,12 +27,12 @@ const NavBar = () => {
               Home
             </Link>
           </li>
-          <li className="nav-bar_item">
+          <li onClick={alertMessage} className="nav-bar_item">
             <Link className="navBar-btn" to="/Create-Collection">
               Create Collection
             </Link>
           </li>
-          <li className="nav-bar_item">
+          <li onClick={alertMessage} className="nav-bar_item">
             <Link className="navBar-btn" to="/Add-Item">
               Add To Collection
             </Link>
@@ -38,7 +43,7 @@ const NavBar = () => {
             </Link>
           </li>
 
-          <li className="nav-bar_item">
+          <li onClick={alertMessage} className="nav-bar_item">
             <Link className="navBar-btn" to="/My-Collection">
               My Collection
             </Link>
@@ -48,7 +53,6 @@ const NavBar = () => {
               contact
             </Link>
           </li>
-        
         </ul>
       </nav>
     </>

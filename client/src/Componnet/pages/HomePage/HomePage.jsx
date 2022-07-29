@@ -31,7 +31,7 @@ const HomePage = () => {
                   className="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs"
                   data-wow-delay="0.8s"
                 >
-                  Let's begin
+                  Let's started{" "}
                 </Link>
                 <a
                   href="#about"
