@@ -1,13 +1,15 @@
 import { createContext, useContext, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 import { InjectedConnector } from "@web3-react/injected-connector";
+import useEzeyNFTFactory from "../Hook/UseEzeyNFTFactory";
 
 export const MyContext = createContext();
 export const MyProvider = MyContext.Provider;
 
 const UseContext = ({ children }) => {
+  const { listUserNFTs } = useEzeyNFTFactory();
   const injected = new InjectedConnector({
-    supportedChainIds: [80001, 1, 3, 4, 5, 42, 137, 56, 43114, 421611],
+    supportedChainIds: [ 80001,1, 3, 4, 5, 42, 137, 56, 43114, 421611],
   });
 
   const { account, activate } = useWeb3React();
@@ -49,6 +51,10 @@ const UseContext = ({ children }) => {
       );
     }
   };
+  const fetchListNFT = async () => {
+    let itemsCollection = await listUserNFTs();
+    return itemsCollection;
+  };
 
   const values = {
     connectMetaMask,
@@ -71,10 +77,11 @@ const UseContext = ({ children }) => {
     contractAddress,
     setContractAddress,
     handleStatues,
+    fetchListNFT,
     successfullyNFT,
     setSuccessfullyNFT,
     buttonIsOn,
-    setButtonIsOn,
+     setButtonIsOn,
   };
   return <MyProvider value={values}>{children}</MyProvider>;
 };

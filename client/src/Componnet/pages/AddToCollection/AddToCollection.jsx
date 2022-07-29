@@ -1,15 +1,11 @@
 import "./AddToCollection.css";
 import { useGlobalContext } from "../../../UseContext/UseContext";
-
 import Spinner from "../../fetchers/Spinner/Spinner";
 import Methods from "../../../Methods/Methods";
 import { useEffect } from "react";
 import { useState } from "react";
 import Steps from "../../fetchers/Steps/Steps";
-import useEzeyNFTFactory from "../../../Hook/UseEzeyNFTFactory";
-
 const AddToCollection = () => {
-  const { listUserNFTs } = useEzeyNFTFactory();
   const [listNFT, setListNFT] = useState([]);
   const {
     setInputSymbol,
@@ -17,6 +13,7 @@ const AddToCollection = () => {
     colorMessage,
     isLoading,
     setIsLoading,
+    fetchListNFT,
     account,
     buttonIsOn,
     setButtonIsOn,
@@ -33,11 +30,6 @@ const AddToCollection = () => {
     setListNFT(resultList);
   };
 
-  const fetchListNFT = async () => {
-    let itemsCollection = await listUserNFTs();
-    return itemsCollection;
-  };
-
   const collectionList = listNFT.map((list) => {
     return (
       <>
@@ -51,8 +43,9 @@ const AddToCollection = () => {
       <section id="contact">
         <div className="container">
           <div id="sideN" className="sidenav">
+            
             <div>
-              {!collectionList[0] && <p id="titleCN">Collection List</p>}
+              {collectionList[0] && <p id="titleCN">Collection List</p>}
               {collectionList && collectionList}
             </div>
           </div>

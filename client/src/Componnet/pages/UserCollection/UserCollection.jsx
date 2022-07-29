@@ -6,7 +6,7 @@ import { useGlobalContext } from "../../../UseContext/UseContext";
 import Spinner from "../../fetchers/Spinner/Spinner";
 import Message from "../../fetchers/Message/Message";
 const UserCollection = () => {
-  const { account, addressShortcut } = useGlobalContext();
+  const { account, addressShortcut, fetchListNFT } = useGlobalContext();
   const [isLoading, setLoading] = useState(true);
   useEffect(() => {
     fetchData();
@@ -17,7 +17,7 @@ const UserCollection = () => {
   const [message, setMessage] = useState("");
 
   const { getDataById } = UseEzeyFunctionsAPI();
-  const { getWalletID,listUserNFTs } = useEzeyNFTFactory();
+  const { getWalletID } = useEzeyNFTFactory();
   let countError = 0;
   const fetchData = async () => {
     try {
@@ -37,12 +37,6 @@ const UserCollection = () => {
       setMessage("There was an error Try refresh.");
       console.log(error);
     }
-  };
-
-
-  const fetchListNFT = async () => {
-    let itemsCollection = await listUserNFTs();
-    return itemsCollection;
   };
 
   const collectionList = listNFT.map((list) => {

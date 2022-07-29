@@ -1,0 +1,38 @@
+
+
+  
+  .grid-containerA {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 210px);
+    gap: 5px;
+    width: 100%;
+    padding: 5px;
+  }
+  
+  .itemA {
+    transition: all 0.5s;
+  }
+  
+  .grid-containerA:hover .itemA {
+    opacity: 0.8;
+  }
+  
+  .itemA:hover {
+    opacity: 1 !important;
+  }
+  
+  .itemA img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .r-span2A {
+    grid-row: span 2;
+  }
+  
+  .c-span2A {
+    grid-column: span 2;
+  }
+ 

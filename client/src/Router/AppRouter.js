@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import AddToCollection from "../Componnet/pages/AddToCollection/AddToCollection";
+import AllNFTs from "../Componnet/pages/AllNFTs/AllNFTs";
 import CreateCollection from "../Componnet/pages/CreateCollection/CreateCollection";
 import CreateNFT from "../Componnet/pages/CreateNFT/CreateNFT";
 import Footer from "../Componnet/pages/Footer/Footer";
@@ -20,6 +21,7 @@ const AppRouter = ({ account }) => {
         )}
         {account && <Route path="/Add-Item" element={<AddToCollection />} />}
         {account && <Route path="/Contact-Us" element={<Footer />} />}
+        {account && <Route path="/AllNFTs" element={<AllNFTs />} />}
         
       </Routes>
     </>

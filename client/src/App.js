@@ -3,6 +3,8 @@ import AppRouter from "./Router/AppRouter";
 import { BrowserRouter as Router } from "react-router-dom";
 import NavBar from "./Componnet/fetchers/NavBar/NavBar";
 import { useWeb3React } from "@web3-react/core";
+import AllNFTs from "./Componnet/pages/AllNFTs/AllNFTs";
+
 
 const App = () => {
   const { account } = useWeb3React();
