@@ -4,7 +4,7 @@ import { useGlobalContext } from "../../../UseContext/UseContext";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
-  const { addressShortcut, account, connectMetaMask } = useGlobalContext();
+  const { addressShortcut, account } = useGlobalContext();
   const alertMessage = () => {
     if (!account) {
       alert(`To get started, click the "Let's started" button in home page.`);

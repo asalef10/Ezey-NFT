@@ -21,8 +21,7 @@ const AppRouter = ({ account }) => {
         )}
         {account && <Route path="/Add-Item" element={<AddToCollection />} />}
         {account && <Route path="/Contact-Us" element={<Footer />} />}
-        { <Route path="/AllNFTs" element={<AllNFTs />} />}
-        
+        {<Route path="/AllNFTs" element={<AllNFTs />} />}
       </Routes>
     </>
   );

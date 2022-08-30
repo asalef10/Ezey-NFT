@@ -2,6 +2,7 @@ import Web3 from "web3";
 import { useWeb3React } from "@web3-react/core";
 
 const useEzeyNFTJSON = require("../Artifacts/EzeyNFTFactory.json");
+
 const useEzeyNFTFactory = () => {
   const { account } = useWeb3React();
 

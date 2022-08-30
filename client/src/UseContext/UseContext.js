@@ -9,7 +9,7 @@ export const MyProvider = MyContext.Provider;
 const UseContext = ({ children }) => {
   const { listUserNFTs } = useEzeyNFTFactory();
   const injected = new InjectedConnector({
-    supportedChainIds: [ 80001,1, 3, 4, 5, 42, 137, 56, 43114, 421611],
+    supportedChainIds: [1337, 80001, 1, 3, 4, 5, 42, 137, 56, 43114, 421611],
   });
 
   const { account, activate } = useWeb3React();
@@ -31,7 +31,7 @@ const UseContext = ({ children }) => {
     setTimeout(() => {
       setMessageStatues("");
       setColorMessage("");
-    }, 3000);
+    }, 4000);
   };
 
   const addressShortcut = (addressWallet) => {
@@ -43,7 +43,14 @@ const UseContext = ({ children }) => {
 
   const connectMetaMask = () => {
     if (window.ethereum) {
-      activate(injected);
+      if (window.ethereum.chainId== '0x13881') {
+        activate(injected);
+      }else{
+        handleStatues(
+          "Ezey-NFT currently works on Polygon testnet (Mumbai) Please switch to Mumbai Network",
+          "red"
+        );
+      }
     } else {
       handleStatues(
         "To use ezeyNFT , please install metamask extension in the browser",
@@ -81,7 +88,7 @@ const UseContext = ({ children }) => {
     successfullyNFT,
     setSuccessfullyNFT,
     buttonIsOn,
-     setButtonIsOn,
+    setButtonIsOn,
   };
   return <MyProvider value={values}>{children}</MyProvider>;
 };
