@@ -14,51 +14,66 @@ const useEzeyNFTFactory = () => {
   );
 
   async function createNFT(nftName, nftSymbol) {
+    try {
+      let estimateGas = await ezeyNFT.methods
+        .createNFT(nftName, nftSymbol)
+        .estimateGas({ from: account });
 
-
-    let estimateGas = await ezeyNFT.methods
-      .createNFT(nftName, nftSymbol)
-      .estimateGas({ from: account });
-    
-    const newNFT = await ezeyNFT.methods
-      .createNFT(nftName, nftSymbol)
-      .send({ from: account ,gas: estimateGas, gasPrice: "40000000000"  });
-    return newNFT;
+      const newNFT = await ezeyNFT.methods
+        .createNFT(nftName, nftSymbol)
+        .send({ from: account, gas: estimateGas, gasPrice: "40000000000" });
+      return newNFT;
+    } catch (error) {
+      console.log(error);
+    }
   }
   async function getNftAddress() {
-    const nftAddress = await ezeyNFT.methods.getNftAddress(account).call();
-    return nftAddress;
+    try {
+      const nftAddress = await ezeyNFT.methods.getNftAddress(account).call();
+      return nftAddress;
+    } catch (error) {
+      console.log(error);
+    }
   }
   async function getContractAddressBySymbol(Symbol) {
-    const contractAddress = await ezeyNFT.methods
-      .getContractAddressBySymbol(Symbol, account)
-      .call();
-    console.log(contractAddress);
-    return contractAddress;
+    try {
+      const contractAddress = await ezeyNFT.methods
+        .getContractAddressBySymbol(Symbol, account)
+        .call();
+      console.log(contractAddress);
+      return contractAddress;
+    } catch (error) {
+      console.log(error);
+    }
   }
   async function listUserNFTs() {
-    const listNFT = await ezeyNFT.methods.showListNFT(account).call();
-    return listNFT;
+    try {
+      const listNFT = await ezeyNFT.methods.showListNFT(account).call();
+      return listNFT;
+    } catch (error) {
+      console.log(error);
+    }
   }
   async function arrayPhotoURI(nftURI) {
-
-    
-    const URI = await ezeyNFT.methods
-      .arrayPhotoURI(nftURI)
-      .send({ from: account });
-    return URI;
+    try {
+      const URI = await ezeyNFT.methods
+        .arrayPhotoURI(nftURI)
+        .send({ from: account });
+      return URI;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function getWalletID() {
-    const walletID = await ezeyNFT.methods.getWalletID(account).call();
-    return walletID;
+    try {
+      const walletID = await ezeyNFT.methods.getWalletID(account).call();
+      return walletID;
+    } catch (error) {
+      console.log(error);
+    }
   }
-  async function IsFirstCollection() {
-    const boolIsFirstCollection = await ezeyNFT.methods
-      .showIsFirstCollection(account)
-      .call();
-    return boolIsFirstCollection;
-  }
+ 
 
   return {
     createNFT,
@@ -67,7 +82,6 @@ const useEzeyNFTFactory = () => {
     listUserNFTs,
     arrayPhotoURI,
     getWalletID,
-    IsFirstCollection,
-  };
+   };
 };
 export default useEzeyNFTFactory;

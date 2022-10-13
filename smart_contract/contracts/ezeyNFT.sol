@@ -7,7 +7,6 @@ import "./ezeyNftEvent.sol";
 
 contract ezeyNFT is ERC721  {
     event newCollection(string tokenURI,string description,address addressWallet);
-    // ezeyNftEvent eventContract;
     address public eventContractAddress;
     string  nameNFT;
     string symbolNFT;
@@ -18,29 +17,28 @@ contract ezeyNFT is ERC721  {
     constructor(string memory name, string memory symbol,uint walletID) 
      ERC721(name,symbol)
     { 
-        nameNFT= name;
-        symbolNFT = symbol;
+    nameNFT= name;
+    symbolNFT = symbol;
     walletUserID = walletID;
     eventContractAddress =  0x2Bf63F3dbfdABe7103B1cbD9982Ac62356295B7E;
     tokenCounter = 0;
 
      }
   
-    function mintNFT(string memory tokenURI,string memory description)public  {
+    function mintNFT(string memory tokenURI,string memory description) external  {
            string memory formatToken = formatTokenURI(tokenURI,description);
           _mint(msg.sender, tokenCounter); 
           _setTokenURI(tokenCounter,formatToken);
           tokenCounter++;
         ezeyNftEvent(eventContractAddress).newEvent(nameNFT,symbolNFT,tokenURI,description,walletUserID,msg.sender);
 
-        emit newCollection(tokenURI,description,msg.sender);
     }
 
-function tokenCounterNumber()public view returns(uint){
-return tokenCounter; 
+    function tokenCounterNumber()external view returns(uint){
+      return tokenCounter; 
 }
 
-    function formatTokenURI(string memory imageURI,string memory description) public pure returns (string memory) {
+    function formatTokenURI(string memory imageURI,string memory description) internal pure returns (string memory) {
         return string(
                 abi.encodePacked(
                     "data:application/json;base64,",
