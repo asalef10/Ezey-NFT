@@ -1,1 +1,2 @@
-# EzeyNFT
+# EzeyNFT -
+ is a dapp application that allows users to upload NFT works quickly, easily and for free. The UI connected to an ERC721 smart contract on the Ethereum network and a Meta-mask wallet account.
