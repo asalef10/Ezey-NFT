@@ -51,7 +51,7 @@ module.exports = {
      network_id: "*",       // Any network (default: none)
     },
     polygonTesnet: {
-       provider: () => new HDWalletProvider('1930aa9ee1af95b6f9a31c44808bbbd46115fde3e05faf588d2202c880d0ce1c', `https://matic-mumbai.chainstacklabs.com/`
+       provider: () => new HDWalletProvider('mnemonic', `https://matic-mumbai.chainstacklabs.com/`
 
        ),
       network_id: 80001,
