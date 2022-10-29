@@ -4,7 +4,7 @@ pragma solidity >=0.4.22 <0.9.0;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./interfaces/IEventEzeyNFT.sol";
 import "base64-sol/base64.sol";
-import "./ezeyNftEvent.sol";
+// import "./ezeyNftEvent.sol";
 
 
 
@@ -22,7 +22,7 @@ contract ezeyNFT is ERC721  {
     nameNFT= name;
     symbolNFT = symbol;
     walletUserID = walletID;
-    eventContractAddress =  0x2Bf63F3dbfdABe7103B1cbD9982Ac62356295B7E;
+    eventContractAddress = 0x2Bf63F3dbfdABe7103B1cbD9982Ac62356295B7E;
     tokenCounter = 0;
 
      }
