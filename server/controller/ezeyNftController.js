@@ -10,10 +10,7 @@ const wsProvider = new Web3.providers.WebsocketProvider(
 
 HDWalletProvider.prototype.on = wsProvider.on.bind(wsProvider);
 let walletKEY = process.env.WALLET_KEY;
-let provider = new HDWalletProvider(
-  walletKEY,
-  wsProvider
-);
+let provider = new HDWalletProvider(walletKEY, wsProvider);
 
 const web3 = new Web3(provider);
 
