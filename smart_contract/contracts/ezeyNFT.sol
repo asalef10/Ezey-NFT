@@ -1,16 +1,18 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 
-import "../ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "./interfaces/IEventEzeyNFT.sol";
 import "base64-sol/base64.sol";
-import "./ezeyNftEvent.sol";
+// import "./ezeyNftEvent.sol";
+
+
 
 contract ezeyNFT is ERC721  {
-    event newCollection(string tokenURI,string description,address addressWallet);
-    address public eventContractAddress;
-    string  nameNFT;
-    string symbolNFT;
-    uint public walletUserID;
+    address private eventContractAddress;
+    string internal nameNFT;
+    string internal symbolNFT;
+    uint internal walletUserID;
 
 
   uint256 internal tokenCounter;
@@ -20,7 +22,7 @@ contract ezeyNFT is ERC721  {
     nameNFT= name;
     symbolNFT = symbol;
     walletUserID = walletID;
-    eventContractAddress =  0x2Bf63F3dbfdABe7103B1cbD9982Ac62356295B7E;
+    eventContractAddress = 0x2Bf63F3dbfdABe7103B1cbD9982Ac62356295B7E;
     tokenCounter = 0;
 
      }
@@ -28,15 +30,11 @@ contract ezeyNFT is ERC721  {
     function mintNFT(string memory tokenURI,string memory description) external  {
            string memory formatToken = formatTokenURI(tokenURI,description);
           _mint(msg.sender, tokenCounter); 
-          _setTokenURI(tokenCounter,formatToken);
+        //   _setTokenURI(tokenCounter,formatToken);
           tokenCounter++;
-        ezeyNftEvent(eventContractAddress).newEvent(nameNFT,symbolNFT,tokenURI,description,walletUserID,msg.sender);
+        // IEventEzeyNFT(eventContractAddress).newEvent(nameNFT,symbolNFT,tokenURI,description,walletUserID,msg.sender);
 
     }
-
-    function tokenCounterNumber()external view returns(uint){
-      return tokenCounter; 
-}
 
     function formatTokenURI(string memory imageURI,string memory description) internal pure returns (string memory) {
         return string(
@@ -54,4 +52,7 @@ contract ezeyNFT is ERC721  {
             );
     }
 
+   function tokenCounterNumber()external view returns(uint){
+      return tokenCounter; 
+}
 }

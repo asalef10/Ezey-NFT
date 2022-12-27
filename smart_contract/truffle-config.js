@@ -46,20 +46,17 @@ module.exports = {
 
 
     development: {
-     host: "127.0.0.1",     // Localhost (default: none)
-     port: 7545,            // Standard Ethereum port (default: none)
-     network_id: "*",       // Any network (default: none)
-    },
-    polygonTesnet: {
-       provider: () => new HDWalletProvider('mnemonic', `https://matic-mumbai.chainstacklabs.com/`
-
-       ),
-      network_id: 80001,
-      confirmations: 0,
-      timeoutBlocks: 200,
-      networkCheckTimeout: 1000000,
-      skipDryRun: true
-  }
+      host: "127.0.0.1",     // Localhost (default: none)
+      port: 7545,            // Standard Ethereum port (default: none)
+      network_id: "*",       // Any network (default: none)
+     },
+  //    testnet: {
+  //      provider: () => new HDWalletProvider('bd1d859f9c3369558e3b7ceea6f7f0bb8b94b83ab662560b143d229487783d26', `https://matic-mumbai.chainstacklabs.com/`),
+  //      network_id: 80001,
+  //      confirmations: 0,
+  //      timeoutBlocks: 10,
+  //      skipDryRun: true
+  //  }
 
     //
     // An additional network, but with some advanced options…
